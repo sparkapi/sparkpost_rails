@@ -12,6 +12,9 @@ module SparkPostRails
       @data = {content: {}}
 
       sparkpost_data = find_sparkpost_data_from mail
+      if sparkpost_data.empty?
+        sparkpost_data = @settings
+      end
 
       prepare_recipients_from mail, sparkpost_data
       prepare_recipients_data_from sparkpost_data
