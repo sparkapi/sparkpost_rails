@@ -220,6 +220,15 @@ module SparkPostRails
       prepare_ip_pool_from sparkpost_data
       prepare_inline_css_from sparkpost_data
       prepare_delivery_schedule_from mail
+      prepare_perform_substitutions_from sparkpost_data
+    end
+
+    def prepare_perform_substitutions_from sparkpost_data
+      @data[:options][:perform_substitutions] = SparkPostRails.configuration.perform_substitutions
+
+      if sparkpost_data.has_key?(:perform_substitutions)
+        @data[:options][:perform_substitutions] = sparkpost_data[:perform_substitutions]
+      end
     end
 
     def prepare_sandbox_mode_from sparkpost_data
